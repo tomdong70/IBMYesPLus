@@ -149,7 +149,7 @@ install(){
       "add": "${IBM_APP_NAME}.us-south.cf.appdomain.cloud",
       "port": "443",
       "id": "${UUID}",
-      "aid": "4",
+      "aid": "233",
       "net": "ws",
       "type": "none",
       "host": "",
