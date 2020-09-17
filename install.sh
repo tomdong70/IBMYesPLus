@@ -67,7 +67,7 @@ EOF
                     "clients": [
                         {
                             "id": "${UUID}",
-                            "alterId": 4
+                            "alterId": 233
                         }
                     ]
                 },
