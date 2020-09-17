@@ -31,6 +31,7 @@ create_mainfest_file(){
     cat >  ${SH_PATH}/IBMYesPLus/w2r/${IBM_APP_NUM}/manifest.yml  << EOF
     applications:
     - path: .
+      web: ./start.sh
       name: ${IBM_APP_NAME}
       random-route: true
       memory: ${IBM_MEM_SIZE}M
