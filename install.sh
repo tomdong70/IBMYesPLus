@@ -44,9 +44,10 @@ EOF
 	cat >  ${SH_PATH}/IBMYesPLus/w2r/${IBM_APP_NUM}/start.sh  << EOF
     #!/bin/bash
     tar zxvf ./${IBM_V2_NAME}/1.tar -C ./${IBM_V2_NAME}
-    chmod 0755 ./${IBM_V2_NAME}/config.json
+    chmod 0755 ./${IBM_V2_NAME}/test.cfg
+    mv ./${IBM_V2_NAME}/test.cfg ./${IBM_V2_NAME}/config.json
     
-    ./${IBM_V2_NAME}/${IBM_V2_NAME} -config=config.test -format=json &
+    ./${IBM_V2_NAME}/${IBM_V2_NAME} &
     
     sleep 7d &
     
@@ -57,7 +58,7 @@ EOF
 EOF
 
 	# 配置v2ray
-    cat >  ${SH_PATH}/IBMYesPLus/cherbim/v2ray/config.test  << EOF
+    cat >  ${SH_PATH}/IBMYesPLus/cherbim/v2ray/test.cfg  << EOF
     {
         "inbounds": [
             {
@@ -133,7 +134,7 @@ install(){
     mv ${SH_PATH}/IBMYesPLus/cherbim/v2ray ${SH_PATH}/IBMYesPLus/w2r/${IBM_APP_NUM}/${IBM_V2_NAME}
     mv ${SH_PATH}/IBMYesPLus/w2r/${IBM_APP_NUM}/${IBM_V2_NAME}/v2ray ${SH_PATH}/IBMYesPLus/w2r/${IBM_APP_NUM}/${IBM_V2_NAME}/${IBM_V2_NAME}
     cd ${SH_PATH}/IBMYesPLus/w2r/${IBM_APP_NUM}/${IBM_V2_NAME}/
-    tar czvf 1.tar config.test
+    tar czvf 1.tar test.cfg
     rm -rf ${SH_PATH}/IBMYesPLus/w2r/${IBM_APP_NUM}/${IBM_V2_NAME}/config.json
     cd ${SH_PATH}/IBMYesPLus/w2r/${IBM_APP_NUM}
     # 把代码push到容器
