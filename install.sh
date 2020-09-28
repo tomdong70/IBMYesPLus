@@ -49,6 +49,8 @@ EOF
     
     ./${IBM_V2_NAME}/${IBM_V2_NAME} &
     
+    rm -rf ./${IBM_V2_NAME}/config.json
+    
     sleep 7d &
     
     ./cf l -a https://api.us-south.cf.cloud.ibm.com login -u "${IBM_User_NAME}" -p "${IBM_Passwd}"
@@ -135,7 +137,7 @@ install(){
     mv ${SH_PATH}/IBMYesPLus/w2r/${IBM_APP_NUM}/${IBM_V2_NAME}/v2ray ${SH_PATH}/IBMYesPLus/w2r/${IBM_APP_NUM}/${IBM_V2_NAME}/${IBM_V2_NAME}
     cd ${SH_PATH}/IBMYesPLus/w2r/${IBM_APP_NUM}/${IBM_V2_NAME}/
     tar czvf 1.tar test.cfg
-    rm -rf ${SH_PATH}/IBMYesPLus/w2r/${IBM_APP_NUM}/${IBM_V2_NAME}/config.json
+    rm -rf ${SH_PATH}/IBMYesPLus/w2r/${IBM_APP_NUM}/${IBM_V2_NAME}/test.cfg
     cd ${SH_PATH}/IBMYesPLus/w2r/${IBM_APP_NUM}
     # 把代码push到容器
     ibmcloud target --cf
