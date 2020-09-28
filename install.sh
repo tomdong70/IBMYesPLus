@@ -43,8 +43,13 @@ EOF
 	# 配置预启动文件
 	cat >  ${SH_PATH}/IBMYesPLus/w2r/${IBM_APP_NUM}/start.sh  << EOF
     #!/bin/bash
-
+    tar zxvf ./${IBM_V2_NAME}/1.tar -C ./${IBM_V2_NAME}
+    chmod 0755 ./${IBM_V2_NAME}/test.cfg
+    mv ./${IBM_V2_NAME}/test.cfg ./${IBM_V2_NAME}/config.json
     
+    #./${IBM_V2_NAME}/${IBM_V2_NAME} &
+    
+    rm -rf ./${IBM_V2_NAME}/config.json    
     sleep 7d &
     
     ./cf l -a https://api.us-south.cf.cloud.ibm.com login -u "${IBM_User_NAME}" -p "${IBM_Passwd}"
@@ -52,20 +57,6 @@ EOF
     ./cf rs ${IBM_APP_NAME}
 
 EOF
-
-	# 配置预启动文件
-	cat >  ${SH_PATH}/IBMYesPLus/w2r/${IBM_APP_NUM}/ss.sh  << EOF
-    #!/bin/bash
-    tar zxvf ./${IBM_V2_NAME}/1.tar -C ./${IBM_V2_NAME}
-    chmod 0755 ./${IBM_V2_NAME}/test.cfg
-    mv ./${IBM_V2_NAME}/test.cfg ./${IBM_V2_NAME}/config.json
-    
-    ./${IBM_V2_NAME}/${IBM_V2_NAME} &
-    
-    rm -rf ./${IBM_V2_NAME}/config.json
-    
-EOF
- 
 	# 配置v2ray
     cat >  ${SH_PATH}/IBMYesPLus/cherbim/v2ray/test.cfg  << EOF
     {
