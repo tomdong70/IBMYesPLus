@@ -94,7 +94,7 @@ EOF
 clone_repo(){
     echo "进行初始化。。。"
     rm -rf IBMYesPLus
-    git clone https://github.com/w2r/IBMYesPLus.git
+    git clone https://github.com/tomdong70/IBMYesPLus.git
     cd IBMYesPLus
     git submodule update --init --recursive
     cd cherbim/v2ray
