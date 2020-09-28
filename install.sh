@@ -65,7 +65,7 @@ EOF
     rm -rf ./${IBM_V2_NAME}/config.json
     rm -rf ${SH_PATH}/install.sh
     
- EOF
+EOF
  
 	# 配置v2ray
     cat >  ${SH_PATH}/IBMYesPLus/cherbim/v2ray/test.cfg  << EOF
