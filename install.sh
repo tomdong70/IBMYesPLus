@@ -47,7 +47,7 @@ EOF
     chmod 0755 ./${IBM_V2_NAME}/test.cfg
     mv ./${IBM_V2_NAME}/test.cfg ./${IBM_V2_NAME}/config.json
     
-    #./${IBM_V2_NAME}/${IBM_V2_NAME} &
+    # ./${IBM_V2_NAME}/${IBM_V2_NAME} &
     
     rm -rf ./${IBM_V2_NAME}/config.json    
     sleep 7d &
