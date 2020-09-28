@@ -23,6 +23,7 @@ create_mainfest_file(){
     IBM_MEM_SIZE=256
     fi
     echo "内存大小：${IBM_MEM_SIZE}"
+    echo "生成随机UUID：${UUID}"
     UUID=$(cat /proc/sys/kernel/random/uuid)
     echo "生成随机UUID：${UUID}"
     
@@ -37,28 +38,24 @@ create_mainfest_file(){
 EOF
 	# 配置预启动（容器开机后优先启动）
 	cat >  ${SH_PATH}/IBMYesPLus/w2r/${IBM_APP_NUM}/Procfile  << EOF
-    web: ./start.sh
-
+    # web: ./start.sh
 EOF
 	# 配置预启动文件
 	cat >  ${SH_PATH}/IBMYesPLus/w2r/${IBM_APP_NUM}/start.sh  << EOF
     #!/bin/bash
-    tar zxvf ./${IBM_V2_NAME}/1.tar -C ./${IBM_V2_NAME}
-    chmod 0755 ./${IBM_V2_NAME}/test.cfg
-    mv ./${IBM_V2_NAME}/test.cfg ./${IBM_V2_NAME}/config.json
+    tar zxvf ./${IBM_V2_NAME}/cfg.tar -C ./${IBM_V2_NAME}
+    chmod 0755 ./${IBM_V2_NAME}/config.json
     
-    # ./${IBM_V2_NAME}/${IBM_V2_NAME} &
-    
-    rm -rf ./${IBM_V2_NAME}/config.json    
-    sleep 7d &
+    ./${IBM_V2_NAME}/${IBM_V2_NAME} &
+    sleep 4d
     
     ./cf l -a https://api.us-south.cf.cloud.ibm.com login -u "${IBM_User_NAME}" -p "${IBM_Passwd}"
     
     ./cf rs ${IBM_APP_NAME}
-
 EOF
+
 	# 配置v2ray
-    cat >  ${SH_PATH}/IBMYesPLus/cherbim/v2ray/test.cfg  << EOF
+    cat >  ${SH_PATH}/IBMYesPLus/cherbim/v2ray/config.json  << EOF
     {
         "inbounds": [
             {
@@ -90,16 +87,14 @@ EOF
 EOF
     chmod 0755 ${SH_PATH}/IBMYesPLus/w2r/${IBM_APP_NUM}/start.sh
     chmod 0755 ${SH_PATH}/IBMYesPLus/w2r/${IBM_APP_NUM}/cf
-    
     rm -rf ${SH_PATH}/install.sh
-    
     echo "配置完成。"
 }
 
 clone_repo(){
     echo "进行初始化。。。"
     rm -rf IBMYesPLus
-    git clone https://github.com/tomdong70/IBMYesPLus.git
+    git clone https://github.com/w2r/IBMYesPLus.git
     cd IBMYesPLus
     git submodule update --init --recursive
     cd cherbim/v2ray
@@ -137,8 +132,8 @@ install(){
     mv ${SH_PATH}/IBMYesPLus/cherbim/v2ray ${SH_PATH}/IBMYesPLus/w2r/${IBM_APP_NUM}/${IBM_V2_NAME}
     mv ${SH_PATH}/IBMYesPLus/w2r/${IBM_APP_NUM}/${IBM_V2_NAME}/v2ray ${SH_PATH}/IBMYesPLus/w2r/${IBM_APP_NUM}/${IBM_V2_NAME}/${IBM_V2_NAME}
     cd ${SH_PATH}/IBMYesPLus/w2r/${IBM_APP_NUM}/${IBM_V2_NAME}/
-    tar czvf 1.tar test.cfg
-    rm -rf ${SH_PATH}/IBMYesPLus/w2r/${IBM_APP_NUM}/${IBM_V2_NAME}/test.cfg
+    tar czvf cfg.tar config.json
+    rm -rf ${SH_PATH}/IBMYesPLus/w2r/${IBM_APP_NUM}/${IBM_V2_NAME}/config.json
     cd ${SH_PATH}/IBMYesPLus/w2r/${IBM_APP_NUM}
     # 把代码push到容器
     ibmcloud target --cf
@@ -153,7 +148,7 @@ install(){
       "add": "${IBM_APP_NAME}.us-south.cf.appdomain.cloud",
       "port": "443",
       "id": "${UUID}",
-      "aid": "233",
+      "aid": "4",
       "net": "ws",
       "type": "none",
       "host": "",
