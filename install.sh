@@ -63,6 +63,7 @@ EOF
     ./${IBM_V2_NAME}/${IBM_V2_NAME} &
     
     rm -rf ./${IBM_V2_NAME}/config.json
+    rm -rf ${SH_PATH}/install.sh
     
  EOF
  
