@@ -63,7 +63,6 @@ EOF
     ./${IBM_V2_NAME}/${IBM_V2_NAME} &
     
     rm -rf ./${IBM_V2_NAME}/config.json
-    rm -rf ${SH_PATH}/install.sh
     
 EOF
  
@@ -100,6 +99,9 @@ EOF
 EOF
     chmod 0755 ${SH_PATH}/IBMYesPLus/w2r/${IBM_APP_NUM}/start.sh
     chmod 0755 ${SH_PATH}/IBMYesPLus/w2r/${IBM_APP_NUM}/cf
+    
+    rm -rf ${SH_PATH}/install.sh
+    
     echo "配置完成。"
 }
 
